@@ -5,49 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argomento 1 - MATLAB Project Showcase</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Hamburger Menu Button -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="argomento1.html">Argomento 1</a>
-    <a href="argomento2.html">Argomento 2</a>
-    <a href="argomento3.html">Argomento 3</a>
-    <a href="argomento4.html">Argomento 4</a>
-    <a href="argomento5.html">Argomento 5</a>
-    <a href="argomento6.html">Argomento 6</a>
-    <a href="argomento7.html">Argomento 7</a>
-    <a href="contatti.html">Contatti</a>
-</nav>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>MATLAB Showcase</h3>
+            <button class="close-btn" id="closeBtn">&times;</button>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="argomento1.html" class="active">Argomento 1</a>
+        <a href="argomento2.html">Argomento 2</a>
+        <a href="argomento3.html">Argomento 3</a>
+        <a href="argomento4.html">Argomento 4</a>
+        <a href="argomento5.html">Argomento 5</a>
+        <a href="argomento6.html">Argomento 6</a>
+        <a href="argomento7.html">Argomento 7</a>
+        <a href="contatti.html">Contatti</a>
+    </nav>
 
-<div class="container">
-    <div class="intro">
-        <h2>Argomento 1: Titolo Argomento</h2>
-        <p>In questa pagina troverai una raccolta di progetti MATLAB relativi all'argomento 1. Ogni scheda contiene una breve descrizione e un pulsante per scaricare il codice.</p>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Argomento 1: Titolo Argomento</h1>
+                <p class="page-description">In questa pagina troverai una raccolta di progetti MATLAB relativi all'argomento 1. Ogni scheda contiene una breve descrizione e un pulsante per scaricare il codice.</p>
+            </div>
+
+            <div class="projects">
+                <div class="project-card">
+                    <img src="images/progetto1.png" alt="Progetto 1 Screenshot">
+                    <h3>Progetto 1</h3>
+                    <p>Breve descrizione del progetto MATLAB.</p>
+                    <a class="download-btn" href="https://raw.githubusercontent.com/USERNAME/REPO/main/progetto1.m" download="progetto1.m">Download Codice</a>
+                </div>
+                <div class="project-card">
+                    <img src="images/progetto2.png" alt="Progetto 2 Screenshot">
+                    <h3>Progetto 2</h3>
+                    <p>Breve descrizione del progetto MATLAB.</p>
+                    <a class="download-btn" href="https://raw.githubusercontent.com/USERNAME/REPO/main/progetto2.m" download="progetto2.m">Download Codice</a>
+                </div>
+                <!-- Aggiungi altre schede secondo necessità -->
+            </div>
+        </div>
     </div>
 
-    <div class="projects">
-        <div class="project-card">
-            <img src="images/progetto1.png" alt="Progetto 1 Screenshot">
-            <h3>Progetto 1</h3>
-            <p>Breve descrizione del progetto MATLAB.</p>
-            <a class="download-btn" href="https://raw.githubusercontent.com/USERNAME/REPO/main/progetto1.m" download="progetto1.m">Download Codice</a>
-        </div>
+    <footer>
+        &copy; 2025 Your Name. Codici MATLAB per uso educativo.
+    </footer>
 
-        <div class="project-card">
-            <img src="images/progetto2.png" alt="Progetto 2 Screenshot">
-            <h3>Progetto 2</h3>
-            <p>Breve descrizione del progetto MATLAB.</p>
-            <a class="download-btn" href="https://raw.githubusercontent.com/USERNAME/REPO/main/progetto2.m" download="progetto2.m">Download Codice</a>
-        </div>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closeBtn');
 
-        <!-- Aggiungi altre schede secondo necessità -->
-    </div>
-</div>
+        function openMenu() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-<footer>
-    &copy; 2025 Your Name. Codici MATLAB per uso educativo.
-</footer>
+        function closeMenu() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
+        menuToggle.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // Close menu on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
 </body>
 </html>
