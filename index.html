@@ -8,27 +8,38 @@
         /* Base styles */
         body {
             font-family: Arial, sans-serif;
-            background-color: #000; /* black background */
-            color: #fff; /* default text white */
+            background-color: #000;
+            color: #fff;
             margin: 0;
             padding: 0;
         }
 
-        /* Header */
-        header {
-            background-color: #b71234; /* Sapienza red */
-            color: white;
-            padding: 25px;
-            text-align: center;
+        /* Navigation bar */
+        nav {
+            background-color: #b71234;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        header h1 {
+        nav h1 {
             margin: 0;
+            font-size: 20px;
         }
 
-        header p {
-            margin-top: 5px;
-            font-size: 16px;
+        nav .nav-links input {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        nav .nav-links input::placeholder {
+            color: #eee;
         }
 
         /* Container */
@@ -38,27 +49,25 @@
             padding: 0 20px;
         }
 
-        /* Project cards grid */
+        /* Project grid */
         .projects {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            justify-content: center;
         }
 
-        /* Individual project card */
+        /* Project card */
         .project-card {
-            background-color: #111; /* slightly lighter black */
-            width: 300px;
+            background-color: #111;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(255,255,255,0.1);
             padding: 15px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .project-card:hover {
-            transform: scale(1.03);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
         }
 
         .project-card img {
@@ -66,25 +75,24 @@
             height: 180px;
             object-fit: cover;
             border-radius: 6px;
-            border: 2px solid #b71234; /* red border around image */
+            border: 2px solid #b71234;
         }
 
         .project-card h3 {
-            margin: 10px 0 5px 0;
-            color: #b71234; /* red title */
+            margin: 10px 0 5px;
+            color: #b71234;
         }
 
         .project-card p {
             font-size: 14px;
-            color: #fff; /* white text */
+            color: #fff;
         }
 
-        /* Download button */
         .download-btn {
             display: inline-block;
             margin-top: 10px;
             padding: 10px 15px;
-            background-color: #b71234; /* red button */
+            background-color: #b71234;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -92,7 +100,7 @@
         }
 
         .download-btn:hover {
-            background-color: #8f1028; /* darker red on hover */
+            background-color: #8f1028;
         }
 
         /* Footer */
@@ -105,34 +113,38 @@
             color: #fff;
         }
 
-        /* Responsive adjustments */
+        /* Responsive tweaks */
         @media (max-width: 650px) {
-            .projects {
+            nav {
                 flex-direction: column;
-                align-items: center;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
 
-<header>
+<!-- Navigation Bar -->
+<nav>
     <h1>My MATLAB Projects</h1>
-    <p>Showcase of MATLAB codes with explanations and download links</p>
-</header>
+    <div class="nav-links">
+        <input type="text" id="search" placeholder="Search projects..." onkeyup="filterProjects()">
+    </div>
+</nav>
 
+<!-- Main Content -->
 <div class="container">
-    <div class="projects">
+    <div class="projects" id="projects-container">
 
         <!-- Project Card Example -->
-        <div class="project-card">
+        <div class="project-card" data-title="Project 1 Title" data-tags="image processing">
             <img src="images/project1.png" alt="Project 1 Screenshot">
             <h3>Project 1 Title</h3>
             <p>Short explanation of what this project does. You can add 2–3 lines here.</p>
             <a class="download-btn" href="https://github.com/USERNAME/REPO1/archive/refs/heads/main.zip" target="_blank">Download Code</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-title="Project 2 Title" data-tags="signal processing">
             <img src="images/project2.png" alt="Project 2 Screenshot">
             <h3>Project 2 Title</h3>
             <p>Brief description or example usage of this MATLAB code.</p>
@@ -140,13 +152,31 @@
         </div>
 
         <!-- Add more project cards as needed -->
-
     </div>
 </div>
 
 <footer>
     &copy; 2025 Your Name. MATLAB codes for educational use only.
 </footer>
+
+<!-- JavaScript: Search/Filter -->
+<script>
+function filterProjects() {
+    const input = document.getElementById('search');
+    const filter = input.value.toLowerCase();
+    const projects = document.getElementById('projects-container').getElementsByClassName('project-card');
+
+    for (let i = 0; i < projects.length; i++) {
+        let title = projects[i].getAttribute('data-title').toLowerCase();
+        let tags = projects[i].getAttribute('data-tags').toLowerCase();
+        if (title.includes(filter) || tags.includes(filter)) {
+            projects[i].style.display = '';
+        } else {
+            projects[i].style.display = 'none';
+        }
+    }
+}
+</script>
 
 </body>
 </html>
