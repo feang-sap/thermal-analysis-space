@@ -5,42 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - MATLAB Project Showcase</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Hamburger Menu Button -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-<!-- Navigation -->
-<nav>
-    <a href="index.html">Home</a>
-    <a href="argomento1.html">Argomento 1</a>
-    <a href="argomento2.html">Argomento 2</a>
-    <a href="argomento3.html">Argomento 3</a>
-    <a href="argomento4.html">Argomento 4</a>
-    <a href="argomento5.html">Argomento 5</a>
-    <a href="argomento6.html">Argomento 6</a>
-    <a href="argomento7.html">Argomento 7</a>
-    <a href="contatti.html">Contatti</a>
-</nav>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>MATLAB Showcase</h3>
+            <button class="close-btn" id="closeBtn">&times;</button>
+        </div>
+        <a href="index.html" class="active">Home</a>
+        <a href="argomento1.html">Argomento 1</a>
+        <a href="argomento2.html">Argomento 2</a>
+        <a href="argomento3.html">Argomento 3</a>
+        <a href="argomento4.html">Argomento 4</a>
+        <a href="argomento5.html">Argomento 5</a>
+        <a href="argomento6.html">Argomento 6</a>
+        <a href="argomento7.html">Argomento 7</a>
+        <a href="contatti.html">Contatti</a>
+    </nav>
 
-<div class="container">
-    <div class="intro">
-        <h2>Benvenuti al MATLAB Project Showcase</h2>
-        <p>Questo sito raccoglie i progetti MATLAB organizzati per argomento. Clicca sui link sopra per esplorare ciascun argomento e scaricare i codici associati.</p>
-    </div>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
-    <div class="projects">
-        <!-- Esempio di card sulla home (opzionale) -->
-        <div class="project-card">
-            <img src="images/progetto1.png" alt="Progetto esempio">
-            <h3>Esempio Progetto</h3>
-            <p>Descrizione breve del progetto MATLAB di esempio.</p>
-            <a class="download-btn" href="https://raw.githubusercontent.com/USERNAME/REPO/main/progetto1.m" download="progetto1.m">Download Codice</a>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="hero-section">
+            <h1>MATLAB Project Showcase</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">Una collezione di progetti e algoritmi scientifici</p>
+        </div>
+
+        <div class="container">
+            <div class="intro-home">
+                <h2>Benvenuti</h2>
+                <p>Questo repository digitale raccoglie una serie di progetti MATLAB sviluppati per scopi educativi e di ricerca. Ogni sezione è dedicata a un argomento specifico, con implementazioni pratiche e codice commentato.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <h3>📊 Analisi Dati</h3>
+                        <p>Algoritmi per l'elaborazione e visualizzazione di dataset complessi</p>
+                    </div>
+                    <div class="feature-box">
+                        <h3>🔬 Simulazioni</h3>
+                        <p>Modelli numerici per sistemi fisici e matematici</p>
+                    </div>
+                    <div class="feature-box">
+                        <h3>🤖 Machine Learning</h3>
+                        <p>Implementazioni di algoritmi di apprendimento automatico</p>
+                    </div>
+                    <div class="feature-box">
+                        <h3>📈 Ottimizzazione</h3>
+                        <p>Metodi per la risoluzione di problemi di ottimizzazione</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>Inizia l'esplorazione</h3>
+                    <p>Utilizza il menu laterale per navigare tra i diversi argomenti. Ogni progetto include codice sorgente scaricabile e documentazione dettagliata.</p>
+                    <button class="cta-btn" onclick="document.getElementById('menuToggle').click()">Esplora i Progetti</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<footer>
-    &copy; 2025 Your Name. Codici MATLAB per uso educativo.
-</footer>
+    <footer>
+        &copy; 2025 Your Name. Codici MATLAB per uso educativo.
+    </footer>
 
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closeBtn');
+
+        function openMenu() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // Close menu on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
 </body>
 </html>
